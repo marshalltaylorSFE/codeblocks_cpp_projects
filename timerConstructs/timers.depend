@@ -1,0 +1,12 @@
+# depslib dependency file v1.0
+1427782085 source:c:\cb_projects\timerconstructs\main.cpp
+	"timerModule.h"
+	"stdio.h"
+	"stdint.h"
+
+1427781458 c:\cb_projects\timerconstructs\timermodule.h
+	"stdint.h"
+
+1427782289 source:c:\cb_projects\timerconstructs\timermodule.cpp
+	"timerModule.h"
+

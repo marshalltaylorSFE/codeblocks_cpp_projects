@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1426562152 source:c:\cb_projects\sensorbar\main.cpp
+	<cstdlib>
+	"stdio.h"
+	"stdint.h"
+	"sensorbar.h"
+
+1426562167 c:\cb_projects\sensorbar\include\sensorbar.h
+	"stdint.h"
+
+1426561666 source:c:\cb_projects\sensorbar\src\sensorbar.cpp
+	"sensorbar.h"
+

@@ -1,0 +1,19 @@
+# depslib dependency file v1.0
+1426973583 source:c:\cb_projects\stdiotest\file.cpp
+	"file.h"
+
+1426973619 c:\cb_projects\stdiotest\file.h
+
+1427005407 source:c:\cb_projects\stdiotest\envelope.cpp
+	"envelope.h"
+
+1426998303 c:\cb_projects\stdiotest\envelope.h
+	"stdint.h"
+
+1427005192 source:c:\cb_projects\stdiotest\main.cpp
+	"envelope.h"
+	"stdio.h"
+	"conio.h"
+	<windows.h>
+	"stdint.h"
+

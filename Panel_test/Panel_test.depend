@@ -1,0 +1,17 @@
+# depslib dependency file v1.0
+1425838498 source:c:\cb_projects\panel_test\src\panelswitch.cpp
+	"PanelSwitch.h"
+
+1425838498 c:\cb_projects\panel_test\include\panelswitch.h
+
+1425838710 source:c:\cb_projects\panel_test\main.cpp
+	<iostream>
+	"PanelSwitch.h"
+	"Panel.h"
+
+1425838859 c:\cb_projects\panel_test\include\panel.h
+	"PanelSwitch.h"
+
+1425838825 source:c:\cb_projects\panel_test\src\panel.cpp
+	"Panel.h"
+
