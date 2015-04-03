@@ -19,10 +19,8 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="file.cpp" />
-		<Unit filename="file.h">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
+		<Unit filename="envelope.cpp" />
+		<Unit filename="envelope.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />

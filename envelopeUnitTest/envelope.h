@@ -10,9 +10,8 @@
 //  Created:  March 21, 2015
 //
 //**********************************************************************//
-#ifndef FILE_H_INCLUDED
-#define FILE_H_INCLUDED
-
+#ifndef ENVELOPE_H_INCLUDED
+#define ENVELOPE_H_INCLUDED
 #include "stdint.h"
 
 //States
@@ -39,7 +38,7 @@ public:
   uint8_t whole;
   uint16_t partial;
   uint16_t partialAcu;
-  int8_t dir;  //1 is positive, -1 is ne..  yeah...
+  int8_t dir;  // 1 or -1
 
 };
 
@@ -75,6 +74,7 @@ public:
   //Variables
   uint8_t amp;
 
+//private:
   //Methods
   void changeAmp( Delta8BitMath & );
 
@@ -88,5 +88,4 @@ public:
 
 };
 
-
-#endif // FILE_H_INCLUDED
+#endif // ENVELOPE_H_INCLUDED

@@ -1,11 +1,7 @@
 # depslib dependency file v1.0
-1426974917 source:c:\cb_projects\envelopeunittest\file.cpp
-	"file.h"
+1428026913 source:d:\github\envelopeunittest\envelope.cpp
+	"envelope.h"
 
-1427173448 c:\cb_projects\envelopeunittest\file.h
+1426998303 d:\github\envelopeunittest\envelope.h
 	"stdint.h"
-
-1427173521 source:c:\cb_projects\envelopeunittest\main.cpp
-	"file.h"
-	"stdio.h"
 

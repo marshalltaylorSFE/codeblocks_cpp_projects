@@ -12,11 +12,12 @@
 //**********************************************************************//
 
 //Includes
-#include "file.h"
+#include "envelope.h"
 
 //**********************************************************************//
 //  First class methods (heh.)
 //
+
 Envelope::Envelope( void )
 {
   //Init variables
@@ -31,7 +32,7 @@ Envelope::Envelope( void )
 
 }
 
-//Call at some repetition-- 1kHz.
+//Call at some repetition-- 0.1kHz.
 void Envelope::tick()
 {
   //State machine
@@ -47,14 +48,14 @@ void Envelope::tick()
       break;
     case SM_ATTACK:
       //Increment amp or leave
-      if((( noteState == NOTE_OFF )&&( amp > envSustain.level )) || ( amp >= 127 ) )
+      if((( noteState == NOTE_OFF )&&( amp > envSustain.level )) || ( amp >= 255 ) )
       {
         next_state = SM_DECAY;
       }
       else
       {
         //ignore new note states, convert to note on
-        if( noteState == NOTE_NEW )
+        if( noteState == NOTE_NEW )//inChar
         {
           noteState = NOTE_ON;
         }
@@ -109,6 +110,7 @@ void Envelope::tick()
   state = next_state;
 }
 
+//ChangeAmp is called by the state machine, which is operated at some frequency
 void Envelope::changeAmp( Delta8BitMath & param )
 {
   int16_t amp_temp = amp;
@@ -126,9 +128,9 @@ void Envelope::changeAmp( Delta8BitMath & param )
     param.partialAcu &= 0x7FFF;
 
     //limit max to 127
-    if( amp_temp > 127 )
+    if( amp_temp > 255 )
     {
-      amp_temp = 127;
+      amp_temp = 255;
     }
     if( amp_temp < 0 )
     {
@@ -192,10 +194,17 @@ Level8BitMath::Level8BitMath( void )
 
 void Delta8BitMath::set( float time_seconds, int8_t var_dir )
 {
+    //Function is given unit of seconds.  If we wish to progress through 256
+    //counts in 1 ms, what would the number be?
+    //
+    //
   //used for delta
   float math_temp;
   math_temp =  256 / ( time_seconds * 1000 );
-  whole = (uint16_t)math_temp;  //This can be unloaded into note_values.c if necessary
+
+  //The units on whole and partial are uint8_t counts/ms
+
+  whole = (uint16_t)math_temp;
   partial = (uint16_t)(( math_temp - whole ) * 32768);
   dir = var_dir;
 
