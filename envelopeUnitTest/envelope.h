@@ -25,34 +25,42 @@
 #define NOTE_ON 1
 #define NOTE_NEW 2
 
-class Delta8BitMath
+class RateParameter
 {
 public:
   //Constructor
-  Delta8BitMath( void );
-
-  //Methods
-  void set( float, int8_t );
+  RateParameter( void );
 
   //Variables
-  uint8_t whole;
-  uint16_t partial;
-  uint16_t partialAcu;
-  int8_t dir;  // 1 or -1
+  uint16_t timeScale;
+  int8_t powerScale;
+  uint8_t maxAmp;
+  uint8_t refValue;
+  int8_t dir; // 1 or -1
 
 };
 
-class Level8BitMath
+class LevelParameter
 {
 public:
   //Constructor
-  Level8BitMath( void );
-
-  //Methods
-  void set( uint8_t );
+  LevelParameter( void );
 
   //Variables
   uint8_t level;
+
+};
+
+class TimeKeeper
+{
+public:
+    TimeKeeper( void );
+    void mClear( void );
+    uint16_t mGet( void );
+    void mIncrement( uint8_t );
+
+private:
+    uint16_t timeElapsed;
 
 };
 
@@ -63,28 +71,31 @@ public:
   Envelope( void );
 
   //Methods
-  void tick( void );
+  void tick( uint8_t );
   void setNoteOn( void );
   void setNoteOff( void );
-  void setAttack( float );
-  void setDecay( float );
+  void setAttack( uint8_t, int8_t );
+  void setDecay( uint8_t, int8_t );
   void setSustain( uint8_t );
-  void setRelease( float );
+  void setRelease( uint8_t, int8_t );
 
   //Variables
   uint8_t amp;
 
 //private:
   //Methods
-  void changeAmp( Delta8BitMath & );
+  void changeAmp( RateParameter &, uint16_t );
 
   //Variables
   uint8_t state;
   uint8_t noteState;
-  Delta8BitMath envAttack;
-  Delta8BitMath envDecay;
-  Level8BitMath envSustain;
-  Delta8BitMath envRelease;
+  //Something to do with time tracking...  time since state entry?
+  TimeKeeper mainTK;
+
+  RateParameter envAttack;
+  RateParameter envDecay;
+  LevelParameter envSustain;
+  RateParameter envRelease;
 
 };
 

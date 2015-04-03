@@ -18,18 +18,21 @@
 #include <windows.h>
 #include "stdint.h"
 
-void gotoxy ( int column, int line );
+#define ENVTICKRATEMS 10
 
+void gotoxy ( int column, int line );
+uint8_t noQuit = 1;
 //Globals
 
 Envelope myEnvelope;
 
 int main( void )
 {
-    myEnvelope.setAttack(1);
-    myEnvelope.setDecay(1);
-    myEnvelope.setSustain(64);
-    myEnvelope.setRelease(1);
+    myEnvelope.setSustain( 127 );
+    myEnvelope.setAttack( 255, -60 );
+    myEnvelope.setDecay( 255, 60 );
+    myEnvelope.setRelease( 255, 60 );
+
     long msTicks = 0;
     long lastService = 0;
 
@@ -38,7 +41,7 @@ int main( void )
     printf("Press 1 to trigger on, press space to trigger off.\n");
     printf("\nSeconds: \nAmplitude:");
 
-    while(1)
+    while(noQuit)
     {
 
         msTicks = msTicks + 10;
@@ -47,14 +50,18 @@ int main( void )
         if( msTicks > (lastService + 10))
         {
             lastService = lastService + 10;
-            myEnvelope.tick();
+            myEnvelope.tick( ENVTICKRATEMS );
+            //printf("%d", msTicks);
+            //printf(", %d\n", myEnvelope.amp);
         }
 
-        //Present the output here
+//        //Present the output here
         gotoxy( 11, 2 );
         printf("%d", (msTicks / 1000));
         gotoxy(11, 3);
         printf("%03d", myEnvelope.amp);  //myEnvelope.amp is the output, 0 to 127
+
+
 
         //This section checks and operates the gate function
         if(_kbhit() == 1)
@@ -71,7 +78,11 @@ int main( void )
             }
             if( inChar == 't')
             {
-                myEnvelope.tick();
+                myEnvelope.tick(10);
+            }
+            if( inChar == 'q')
+            {
+                noQuit = 0;
             }
         }
 

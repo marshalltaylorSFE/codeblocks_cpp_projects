@@ -5,3 +5,18 @@
 1426998303 d:\github\envelopeunittest\envelope.h
 	"stdint.h"
 
+1428099430 source:c:\github\codeblocks_cpp_projects\envelopeunittest\envelope.cpp
+	"envelope.h"
+	"math.h"
+	"stdio.h"
+
+1428088467 c:\github\codeblocks_cpp_projects\envelopeunittest\envelope.h
+	"stdint.h"
+
+1428100378 source:c:\github\codeblocks_cpp_projects\envelopeunittest\main.cpp
+	"envelope.h"
+	"stdio.h"
+	"conio.h"
+	<windows.h>
+	"stdint.h"
+
