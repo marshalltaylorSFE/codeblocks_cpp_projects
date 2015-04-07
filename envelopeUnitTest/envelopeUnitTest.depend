@@ -20,3 +20,20 @@
 	<windows.h>
 	"stdint.h"
 
+1428391522 source:d:\github\codeblocks_cpp_projects\envelopeunittest\envelope.cpp
+	"envelope.h"
+	"math.h"
+	"stdio.h"
+
+1428381606 d:\github\codeblocks_cpp_projects\envelopeunittest\envelope.h
+	"stdint.h"
+
+1428391458 source:d:\github\codeblocks_cpp_projects\envelopeunittest\main.cpp
+	"envelope.h"
+	"stdio.h"
+	"conio.h"
+	<windows.h>
+	"stdint.h"
+	<iostream>
+	<fstream>
+

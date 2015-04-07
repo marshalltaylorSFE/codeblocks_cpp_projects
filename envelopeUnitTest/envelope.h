@@ -17,8 +17,12 @@
 //States
 #define SM_IDLE 0
 #define SM_ATTACK 1
-#define SM_DECAY 2
-#define SM_RELEASE 3
+#define SM_POST_DECAY 2
+#define SM_PRE_DECAY 3
+#define SM_DECAY 4
+#define SM_PRE_RELEASE 5
+#define SM_RELEASE 6
+#define SM_POST_RELEASE 7
 
 //Note states
 #define NOTE_OFF 0
@@ -34,9 +38,9 @@ public:
   //Variables
   uint16_t timeScale;
   int8_t powerScale;
-  uint8_t maxAmp;
-  uint8_t refValue;
-  int8_t dir; // 1 or -1
+  //uint8_t maxAmp;
+  //uint8_t refValue;
+  //int8_t dir; // 1 or -1
 
 };
 
@@ -45,7 +49,7 @@ class LevelParameter
 public:
   //Constructor
   LevelParameter( void );
-
+  uint8_t getLevel( void );
   //Variables
   uint8_t level;
 
@@ -78,13 +82,21 @@ public:
   void setDecay( uint8_t, int8_t );
   void setSustain( uint8_t );
   void setRelease( uint8_t, int8_t );
+  void setState( uint8_t );
+
+  //RateParameter getAttack( void );
+  //RateParameter getDecay( void );
+  //RateParameter getRelease( void );
 
   //Variables
   uint8_t amp;
+  void changeAmp( uint8_t );
 
 //private:
   //Methods
-  void changeAmp( RateParameter &, uint16_t );
+  //void changeAmp( RateParameter &, uint16_t );
+  void changeAmp( RateParameter &, uint16_t, uint8_t );
+  void changeAmp( LevelParameter & );
 
   //Variables
   uint8_t state;

@@ -17,7 +17,10 @@
 #include "conio.h"
 #include <windows.h>
 #include "stdint.h"
-
+// basic file operations
+#include <iostream>
+#include <fstream>
+using namespace std;
 #define ENVTICKRATEMS 10
 
 void gotoxy ( int column, int line );
@@ -25,13 +28,15 @@ uint8_t noQuit = 1;
 //Globals
 
 Envelope myEnvelope;
+Envelope myEnvelopeShadow;
 
 int main( void )
 {
-    myEnvelope.setSustain( 127 );
-    myEnvelope.setAttack( 255, -60 );
-    myEnvelope.setDecay( 255, 60 );
-    myEnvelope.setRelease( 255, 60 );
+
+    myEnvelope.setSustain( 96 );
+    myEnvelope.setAttack( 255, 80 );
+    myEnvelope.setDecay( 255, 80 );
+    myEnvelope.setRelease( 190, -40 );
 
     long msTicks = 0;
     long lastService = 0;
@@ -44,13 +49,15 @@ int main( void )
     while(noQuit)
     {
 
-        msTicks = msTicks + 10;
-        Sleep(10);
+        msTicks = msTicks + ENVTICKRATEMS;
+        Sleep(ENVTICKRATEMS);
         //This is made to tick every 10 ms
-        if( msTicks > (lastService + 10))
+        if( msTicks > (lastService + ENVTICKRATEMS))
         {
-            lastService = lastService + 10;
+            lastService = lastService + ENVTICKRATEMS;
             myEnvelope.tick( ENVTICKRATEMS );
+            myEnvelopeShadow.tick( ENVTICKRATEMS );
+
             //printf("%d", msTicks);
             //printf(", %d\n", myEnvelope.amp);
         }
@@ -87,11 +94,105 @@ int main( void )
         }
 
     }
+    //Has quit.  Now write a file
+    msTicks = 0;
+    lastService = 0;
+    noQuit = 1;
+    //Make the delays
+    TimeKeeper testTK;
+
+    FILE * pFile;
+
+    pFile = fopen ("example.txt","w");
+    uint8_t noteOnServiced = 0;
+    uint8_t noteOnServiced2 = 0;
+    uint8_t noteOffServiced = 0;
+    uint8_t noteOffServiced2 = 0;
+    uint8_t noteOnShadowServiced = 0;
+    uint16_t lastTestTK = 0;
+    uint8_t lastNoteState = 0;
+    myEnvelopeShadow = myEnvelope;
+
+    while(noQuit)
+    {
+
+        msTicks = msTicks + ENVTICKRATEMS;
+        testTK.mIncrement( ENVTICKRATEMS );
+        //Sleep(ENVTICKRATEMS);
+        //This is made to tick every 10 ms
+        if( msTicks > (lastService + ENVTICKRATEMS))
+        {
+            lastService = lastService + ENVTICKRATEMS;
+            myEnvelope.tick( ENVTICKRATEMS );
+            myEnvelopeShadow.tick( ENVTICKRATEMS );
+
+            //printf("%d", msTicks);
+            //printf(", %d\n", myEnvelope.amp);
+        }
+
+//        if( testTK.mGet() > (lastTestTK + 200))
+//        {
+//            lastTestTK += 200;
+//            if( lastNoteState == 0)
+//            {
+//                myEnvelope.setNoteOn();
+//                lastNoteState = 1;
+//            }
+//            else
+//            {
+//                myEnvelope.setNoteOff();
+//                lastNoteState = 0;
+//            }
+//
+//        }
+        //If greater than... note on
+        if( (noteOnServiced == 0) && (testTK.mGet() > 100 ) )
+        {
+            myEnvelope.setNoteOn();
+            noteOnServiced = 1;
+        }
+        //If greater than... note off
+        if( (noteOffServiced == 0) && (testTK.mGet() > 1400 ) )
+        {
+            myEnvelope.setNoteOff();
+            noteOffServiced = 1;
+        }
+        //If greater than... note on
+        if( (noteOnServiced2 == 0) && (testTK.mGet() > 2500 ) )
+        {
+            myEnvelope.setNoteOn();
+            noteOnServiced2 = 1;
+        }
+        //If greater than... note off
+        if( (noteOffServiced2 == 0) && (testTK.mGet() > 3600 ) )
+        {
+            myEnvelope.setNoteOff();
+            noteOffServiced2 = 1;
+        }        //If greater than... note on
+        if( (noteOnShadowServiced == 0) && (testTK.mGet() > 7000 ) )
+        {
+            myEnvelopeShadow.setNoteOn();
+            noteOnShadowServiced = 1;
+        }
+        //If greater than... quit
+        if( testTK.mGet() > 10000 )
+        {
+            noQuit = 0;
+        }
+//        //Present the output here
+
+        fprintf(pFile, "%d\t", (msTicks));
+        fprintf(pFile, "%03d\t", myEnvelope.amp);  //myEnvelope.amp is the output, 0 to 127
+        fprintf(pFile, "%03d\n", myEnvelopeShadow.amp);  //myEnvelope.amp is the output, 0 to 127
+
+
+
+    }
+    fclose (pFile);
+
 
 
 }
-
-
 void gotoxy ( int column, int line )
 {
     COORD coord;
