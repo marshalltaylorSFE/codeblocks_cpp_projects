@@ -28,14 +28,15 @@ uint8_t noQuit = 1;
 //Globals
 
 Envelope myEnvelope;
+Envelope myEnvelopeShadow;
 
 int main( void )
 {
 
-    myEnvelope.setSustain( 200 );
-    myEnvelope.setAttack( 255, -80 );
-    myEnvelope.setDecay( 255, -20 );
-    myEnvelope.setRelease( 150, -20 );
+    myEnvelope.setSustain( 96 );
+    myEnvelope.setAttack( 255, 80 );
+    myEnvelope.setDecay( 255, 80 );
+    myEnvelope.setRelease( 190, -40 );
 
     long msTicks = 0;
     long lastService = 0;
@@ -55,6 +56,7 @@ int main( void )
         {
             lastService = lastService + ENVTICKRATEMS;
             myEnvelope.tick( ENVTICKRATEMS );
+            myEnvelopeShadow.tick( ENVTICKRATEMS );
 
             //printf("%d", msTicks);
             //printf(", %d\n", myEnvelope.amp);
@@ -109,6 +111,7 @@ int main( void )
     uint8_t noteOnShadowServiced = 0;
     uint16_t lastTestTK = 0;
     uint8_t lastNoteState = 0;
+    myEnvelopeShadow = myEnvelope;
 
     while(noQuit)
     {
@@ -121,6 +124,7 @@ int main( void )
         {
             lastService = lastService + ENVTICKRATEMS;
             myEnvelope.tick( ENVTICKRATEMS );
+            myEnvelopeShadow.tick( ENVTICKRATEMS );
 
             //printf("%d", msTicks);
             //printf(", %d\n", myEnvelope.amp);
@@ -148,26 +152,26 @@ int main( void )
             noteOnServiced = 1;
         }
         //If greater than... note off
-        if( (noteOffServiced == 0) && (testTK.mGet() > 500 ) )
+        if( (noteOffServiced == 0) && (testTK.mGet() > 1400 ) )
         {
-            //myEnvelope.setNoteOff();
+            myEnvelope.setNoteOff();
             noteOffServiced = 1;
         }
         //If greater than... note on
-        if( (noteOnServiced2 == 0) && (testTK.mGet() > 1000 ) )
+        if( (noteOnServiced2 == 0) && (testTK.mGet() > 2500 ) )
         {
-            //myEnvelope.setNoteOn();
+            myEnvelope.setNoteOn();
             noteOnServiced2 = 1;
         }
         //If greater than... note off
-        if( (noteOffServiced2 == 0) && (testTK.mGet() > 3000 ) )
+        if( (noteOffServiced2 == 0) && (testTK.mGet() > 3600 ) )
         {
             myEnvelope.setNoteOff();
             noteOffServiced2 = 1;
         }        //If greater than... note on
         if( (noteOnShadowServiced == 0) && (testTK.mGet() > 7000 ) )
         {
-            myEnvelope.setNoteOn();
+            myEnvelopeShadow.setNoteOn();
             noteOnShadowServiced = 1;
         }
         //If greater than... quit
@@ -179,7 +183,7 @@ int main( void )
 
         fprintf(pFile, "%d\t", (msTicks));
         fprintf(pFile, "%03d\t", myEnvelope.amp);  //myEnvelope.amp is the output, 0 to 127
-        fprintf(pFile, "%03d\n", myEnvelope.shadowAmp);  //myEnvelope.amp is the output, 0 to 127
+        fprintf(pFile, "%03d\n", myEnvelopeShadow.amp);  //myEnvelope.amp is the output, 0 to 127
 
 
 

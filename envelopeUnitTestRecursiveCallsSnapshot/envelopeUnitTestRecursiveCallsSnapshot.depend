@@ -1,0 +1,56 @@
+# depslib dependency file v1.0
+1428026913 source:d:\github\envelopeunittestRecursiveCallsSnapshot\envelope.cpp
+	"envelope.h"
+
+1426998303 d:\github\envelopeunittestRecursiveCallsSnapshot\envelope.h
+	"stdint.h"
+
+1428099430 source:c:\github\codeblocks_cpp_projects\envelopeunittestRecursiveCallsSnapshot\envelope.cpp
+	"envelope.h"
+	"math.h"
+	"stdio.h"
+
+1428088467 c:\github\codeblocks_cpp_projects\envelopeunittestRecursiveCallsSnapshot\envelope.h
+	"stdint.h"
+
+1428100378 source:c:\github\codeblocks_cpp_projects\envelopeunittestRecursiveCallsSnapshot\main.cpp
+	"envelope.h"
+	"stdio.h"
+	"conio.h"
+	<windows.h>
+	"stdint.h"
+
+1428391522 source:d:\github\codeblocks_cpp_projects\envelopeunittestRecursiveCallsSnapshot\envelope.cpp
+	"envelope.h"
+	"math.h"
+	"stdio.h"
+
+1428381606 d:\github\codeblocks_cpp_projects\envelopeunittestRecursiveCallsSnapshot\envelope.h
+	"stdint.h"
+
+1428391458 source:d:\github\codeblocks_cpp_projects\envelopeunittestRecursiveCallsSnapshot\main.cpp
+	"envelope.h"
+	"stdio.h"
+	"conio.h"
+	<windows.h>
+	"stdint.h"
+	<iostream>
+	<fstream>
+
+1428391522 source:d:\github\codeblocks_cpp_projects\envelopeunittestrecursivecallssnapshot\envelope.cpp
+	"envelope.h"
+	"math.h"
+	"stdio.h"
+
+1428381606 d:\github\codeblocks_cpp_projects\envelopeunittestrecursivecallssnapshot\envelope.h
+	"stdint.h"
+
+1428391717 source:d:\github\codeblocks_cpp_projects\envelopeunittestrecursivecallssnapshot\main.cpp
+	"envelope.h"
+	"stdio.h"
+	"conio.h"
+	<windows.h>
+	"stdint.h"
+	<iostream>
+	<fstream>
+
