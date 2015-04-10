@@ -20,15 +20,15 @@
 	<windows.h>
 	"stdint.h"
 
-1428647606 source:d:\github\codeblocks_cpp_projects\envelopeunittest\envelope.cpp
+1428477691 source:d:\github\codeblocks_cpp_projects\envelopeunittest\envelope.cpp
 	"envelope.h"
 	"math.h"
 	"stdio.h"
 
-1428641519 d:\github\codeblocks_cpp_projects\envelopeunittest\envelope.h
+1428475444 d:\github\codeblocks_cpp_projects\envelopeunittest\envelope.h
 	"stdint.h"
 
-1428648164 source:d:\github\codeblocks_cpp_projects\envelopeunittest\main.cpp
+1428479236 source:d:\github\codeblocks_cpp_projects\envelopeunittest\main.cpp
 	"envelope.h"
 	"stdio.h"
 	"conio.h"
@@ -36,18 +36,4 @@
 	"stdint.h"
 	<iostream>
 	<fstream>
-	<cstdlib>
-	<iostream>
-	<string>
-	"bitmap_image.hpp"
-
-946710000 d:\github\codeblocks_cpp_projects\envelopeunittest\bitmap_image.hpp
-	<algorithm>
-	<cmath>
-	<cstdlib>
-	<fstream>
-	<iostream>
-	<iterator>
-	<limits>
-	<string>
 

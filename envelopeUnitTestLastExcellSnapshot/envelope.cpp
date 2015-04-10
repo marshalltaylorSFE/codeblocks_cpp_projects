@@ -93,10 +93,8 @@ void Envelope::tick( uint8_t msElapsed )
         changeAmp( envDecay, shadowTimeKeeper.mGet(), SM_DECAY, shadowAmp );
         if( shadowAmp <= amp ) //It's time to move
         {
-            //Change to the shadowAmp
             next_state = SM_DECAY;
             mainTimeKeeper = shadowTimeKeeper;
-            changeAmp( envDecay, mainTimeKeeper.mGet(), SM_DECAY, amp);
         }
         break;
     case SM_DECAY:
@@ -145,10 +143,8 @@ void Envelope::tick( uint8_t msElapsed )
         changeAmp( envRelease, shadowTimeKeeper.mGet(), SM_RELEASE, shadowAmp );
         if( shadowAmp < amp ) //It's time to move
         {
-            //change to shadowAmp
             next_state = SM_RELEASE;
             mainTimeKeeper = shadowTimeKeeper;
-            changeAmp( envRelease, mainTimeKeeper.mGet(), SM_RELEASE, amp );
         }
         break;
     case SM_RELEASE:
@@ -170,29 +166,19 @@ void Envelope::tick( uint8_t msElapsed )
         }
         break;
     case SM_POST_RELEASE:
-        if( noteState == NOTE_OFF )
-        {
-            //go back to the release
-            next_state = SM_RELEASE;
-            //put the shadow away
-
-        }
         //Keep decaying the main
-        else
+        if( amp > 0 )
         {
-            if( amp > 0 )
-            {
-                changeAmp( envRelease, mainTimeKeeper.mGet(), state, amp );
-            }
-            //Start attacking the shadow
-            changeAmp( envAttack, shadowTimeKeeper.mGet(), SM_ATTACK, shadowAmp );
-            if( shadowAmp > amp ) //It's time to move
-            {
-                next_state = SM_ATTACK;
-                //Now, copy the shadow to the main
+            changeAmp( envRelease, mainTimeKeeper.mGet(), state, amp );
+        }
+        //Start attacking the shadow
+        changeAmp( envAttack, shadowTimeKeeper.mGet(), SM_ATTACK, shadowAmp );
+        if( shadowAmp > amp ) //It's time to move
+        {
+            next_state = SM_ATTACK;
+            //Now, copy the shadow to the main
 
-                mainTimeKeeper = shadowTimeKeeper;
-            }
+            mainTimeKeeper = shadowTimeKeeper;
         }
         break;
     default:
@@ -252,6 +238,16 @@ void Envelope::changeAmp( RateParameter& param, uint16_t timeVar, uint8_t stateV
     ampVar = (refLevel + ( polarity * ampTemp ));
 
 
+    printf("\n\n\n%d    ", ampTemp);
+    printf("\n\n\n\n\n");
+    printf("%d   \n", param.timeScale );
+    printf("%d   \n", param.powerScale );
+    //printf("%d   \n", param.maxAmp );
+    //printf("%d   \n", param.dir );
+    printf("%d   \n", envSustain.level );
+
+//  printf("%f\n", exp(2*(float)param.powerScale/127) );
+
 }
 
 void Envelope::changeAmp( LevelParameter& param, uint8_t& ampVar )
@@ -309,7 +305,7 @@ void Envelope::setSustain( uint8_t var_sustain )
 
 uint8_t LevelParameter::getLevel( void )
 {
-    return level;
+  return level;
 
 }
 

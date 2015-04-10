@@ -19,7 +19,6 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="bitmap_image.hpp" />
 		<Unit filename="envelope.cpp" />
 		<Unit filename="envelope.h" />
 		<Unit filename="main.cpp" />

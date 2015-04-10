@@ -97,9 +97,8 @@ private:
 
   //Variables
   uint8_t state;
-public:
   uint8_t noteState;
-private:
+
   //Timekeepers are modified logical counter modules
   TimeKeeper mainTimeKeeper;
   TimeKeeper shadowTimeKeeper;
