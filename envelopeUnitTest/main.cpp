@@ -45,12 +45,13 @@ int main( void )
     myEnvelope.setAttack( 200, 80 );
     myEnvelope.setDecay( 255, 20 );
     myEnvelope.setRelease( 150, 20 );
+    myEnvelope.setAttackHold( 255 );
 
     myEnvelope2.setSustain( 160 );
     myEnvelope2.setAttack( 200, 100 );
     myEnvelope2.setDecay( 255, 60 );
     myEnvelope2.setRelease( 150, -35 );
-
+    myEnvelope2.setAttackHold( 255 );
     long msTicks = 0;
     long lastService = 0;
 
@@ -98,6 +99,7 @@ int main( void )
    uint16_t Box2origin2[2] = {6,759};
    uint16_t Box2maxBox2[2] = {1011,96};
    uint16_t Box2lastXY3[2] = {6,759};
+   uint16_t Box2lastXY4[2] = {6,759};
 
    //Grid prep
    draw.pen_color(200,200,200);
@@ -229,7 +231,7 @@ int main( void )
     events2[3][2] = 0;
 
     events2[4][0] = 4100;
-    events2[4][1] = 1;
+    events2[4][1] = 11;
     events2[4][2] = 0;
 
     events2[5][0] = 6000;
@@ -312,6 +314,10 @@ int main( void )
                 case 1:
                     myEnvelope2.setNoteOn();
                     break;
+                case 11:
+                    myEnvelope2.setAttackHold( 0 );
+                    myEnvelope2.setNoteOn();
+                    break;
                 case 255:
                     noQuit = 0;
                 default:
@@ -357,6 +363,12 @@ int main( void )
         draw.line_segment(Box2lastXY[0],Box2lastXY[1],Box2origin[0] + msTicks/10,Box2origin[1]-myEnvelope2.amp);
         Box2lastXY[0] = Box2origin[0] + msTicks/10;
         Box2lastXY[1] = ((int)Box2origin[1]-myEnvelope2.amp);
+
+
+        draw.pen_color(0,0,255);
+        draw.line_segment(Box2lastXY4[0],Box2lastXY4[1],Box2origin2[0] + msTicks/10,Box2origin2[1]-((myEnvelope2.envAttackHold.timeScale*255/25/4) + 16));
+        Box2lastXY4[0] = Box2origin2[0] + msTicks/10;
+        Box2lastXY4[1] = ((int)Box2origin2[1]-((myEnvelope2.envAttackHold.timeScale*255/25/4) + 16));
 
 
         draw.pen_color(255,0,255);

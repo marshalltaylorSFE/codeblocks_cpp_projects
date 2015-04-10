@@ -51,7 +51,7 @@ void Envelope::tick( uint8_t msElapsed )
         //Increment amp or leave
         if( amp == 255 )
         {
-            next_state = SM_DECAY;
+            next_state = SM_ATTACK_HOLD;
             mainTimeKeeper.mClear();
         }
         else if( noteState == NOTE_OFF )
@@ -97,6 +97,14 @@ void Envelope::tick( uint8_t msElapsed )
             next_state = SM_DECAY;
             mainTimeKeeper = shadowTimeKeeper;
             changeAmp( envDecay, mainTimeKeeper.mGet(), SM_DECAY, amp);
+        }
+        break;
+    case SM_ATTACK_HOLD:
+        //Increment amp or leave
+        if( mainTimeKeeper.mGet() > envAttackHold.timeScale )
+        {
+            next_state = SM_DECAY;
+            mainTimeKeeper.mClear();
         }
         break;
     case SM_DECAY:
@@ -320,6 +328,11 @@ void Envelope::setRelease( uint8_t var_release, int8_t var_power )
 
 }
 
+void Envelope::setAttackHold( uint8_t var_attackHold )
+{
+    envAttackHold.timeScale = (((uint32_t)var_attackHold * 25) >> 8);
+
+}
 RateParameter::RateParameter( void )
 {
     //Constructor

@@ -23,6 +23,7 @@
 #define SM_PRE_RELEASE 5
 #define SM_RELEASE 6
 #define SM_POST_RELEASE 7
+#define SM_ATTACK_HOLD 8
 
 //Note states
 #define NOTE_OFF 0
@@ -79,6 +80,7 @@ public:
   void setDecay( uint8_t, int8_t );
   void setSustain( uint8_t );
   void setRelease( uint8_t, int8_t );
+  void setAttackHold( uint8_t );
   //void setState( uint8_t );
 
   //RateParameter getAttack( void );
@@ -111,6 +113,8 @@ private:
   LevelParameter envSustain;
   RateParameter envRelease;
   //RateParameter envReleaseShadow;
+public:
+  RateParameter envAttackHold;
 
 };
 
