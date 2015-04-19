@@ -41,10 +41,10 @@ Envelope myEnvelope2;
 int main( void )
 {
 
-    myEnvelope.setSustain( 160 );
-    myEnvelope.setAttack( 200, 80 );
-    myEnvelope.setDecay( 255, 20 );
-    myEnvelope.setRelease( 150, 20 );
+    myEnvelope.setSustain( 110 );
+    myEnvelope.setAttack( 50, 100 );
+    myEnvelope.setDecay( 255, 60 );
+    myEnvelope.setRelease( 150, -80 );
     myEnvelope.setAttackHold( 255 );
 
     myEnvelope2.setSustain( 160 );
