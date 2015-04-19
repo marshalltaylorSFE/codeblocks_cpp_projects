@@ -19,6 +19,8 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="NoteStack.cpp" />
+		<Unit filename="NoteStack.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />

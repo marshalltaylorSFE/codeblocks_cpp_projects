@@ -1,0 +1,20 @@
+# depslib dependency file v1.0
+1429420327 source:d:\github\notestacklibrary\notestack.cpp
+	"NoteStack.h"
+	"stdint.h"
+	"stdio.h"
+
+1429413014 d:\github\notestacklibrary\notestack.h
+	"stdint.h"
+
+1429417095 source:d:\github\notestacklibrary\main.cpp
+	"NoteStack.h"
+	"stdio.h"
+
+1429421455 source:d:\github\codeblocks_cpp_projects\notestack\main.cpp
+	"NoteStack.h"
+	"stdio.h"
+
+1429413014 d:\github\codeblocks_cpp_projects\notestack\notestack.h
+	"stdint.h"
+
