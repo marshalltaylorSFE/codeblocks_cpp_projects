@@ -105,30 +105,59 @@ stackNote NoteStack::peekNote( stackDepthVar inputDepth ) //depth 0 = top
 }
 
 //Pass position, returns stackNote
-stackNote NoteStack::dropNote( stackDepthVar noteToDrop )
+void NoteStack::dropNote( stackDepthVar depthToDrop )
 {
-    stackNote noteToReturn;
-    return noteToReturn;
+    //Protect against invalid depths
+    if( depthToDrop == 0 )
+    {
+        popNote();
+    }
+    else if( depthToDrop > currentDepth )
+    {
+        //invalid, do nothing
+    }
+    else
+    {
+        //Ok, good to do it.
+
+        //pointer for note above note to drop
+        stackNote * noteAbove = topStackNote;
+        //pointer for note to drop
+        stackNote * noteToDrop;
+        //go to the depth above the one to drop
+        for(uint8_t i = 0; i < (depthToDrop - 1); i++ )
+        {
+            noteAbove = noteAbove->lowerStackNote;
+        }
+        //point the note to drop
+        noteToDrop = noteAbove->lowerStackNote;
+        //Redirect the note above
+        noteAbove->lowerStackNote = noteToDrop->lowerStackNote;//noteToDrop->lowerStackNote;
+        //Drop it like it's hot
+        delete noteToDrop;
+        currentDepth--;
+    }
+
 }
 
 //pass stackNote, returns position
-stackDepthVar NoteStack::seekNote( stackNote & noteToSeek )
+uint8_t NoteStack::seekNote( stackNote & noteToSeek )
 {
     //Create temporary note to use for comparison
-    stackNote * noteVar;
+    stackNote * noteVar = new stackNote;
     noteVar = topStackNote;
-    stackDepthVar depthToReturn = maxDepth + 1;
+    int8_t returnVar = -1;
 
     for(uint8_t i = 0; i < currentDepth; i++)
     {
-        //if( noteVar == noteToSeek )
+        if( noteVar->noteValue == noteToSeek.noteValue )
         {
-            depthToReturn = i;
+             returnVar = i;
         }
         //Walk down into the stack
         noteVar = noteVar->lowerStackNote;
     }
-    return depthToReturn;
+    return returnVar;
 }
 
 //returns depth of stack.

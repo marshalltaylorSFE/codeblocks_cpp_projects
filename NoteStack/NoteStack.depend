@@ -18,3 +18,15 @@
 1429413014 d:\github\codeblocks_cpp_projects\notestack\notestack.h
 	"stdint.h"
 
+1429514693 source:c:\github\codeblocks_cpp_projects\notestack\main.cpp
+	"NoteStack.h"
+	"stdio.h"
+
+1429513797 c:\github\codeblocks_cpp_projects\notestack\notestack.h
+	"stdint.h"
+
+1429514577 source:c:\github\codeblocks_cpp_projects\notestack\notestack.cpp
+	"NoteStack.h"
+	"stdint.h"
+	"stdio.h"
+

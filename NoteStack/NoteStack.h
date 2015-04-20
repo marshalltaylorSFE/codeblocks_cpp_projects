@@ -43,12 +43,12 @@ public:
 public:
     NoteStack( stackDepthVar ); //Construct with passed max depth
     NoteStack( void );
-    void pushNote( stackNote& ); //Pass stackNote
+    void pushNote( stackNote & ); //Pass stackNote
     stackNote popNote( void ); //returns stackNote
     stackNote peekNote( void );
     stackNote peekNote( stackDepthVar );
-    stackNote dropNote( stackDepthVar ); //Pass position, returns stackNote
-    stackDepthVar seekNote( stackNote& ); //pass stackNote, returns position
+    void dropNote( stackDepthVar ); //Pass position, returns stackNote
+    uint8_t seekNote( stackNote & ); //pass stackNote, returns position
     stackDepthVar stackDepth( void ); //returns depth of stack.
     void printfNoteStack( void );
 

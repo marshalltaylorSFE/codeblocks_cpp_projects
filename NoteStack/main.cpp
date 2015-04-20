@@ -66,4 +66,12 @@ int main( void )
     }
     myNoteStack.printfNoteStack();
 
+    printf("Seeking notevalue 19.\n");
+    printf("Depth: %d\n", myNoteStack.seekNote( myStackNote ));
+    myNoteStack.printfNoteStack();
+
+    printf("dropping 19.\n");
+    myNoteStack.dropNote(myNoteStack.seekNote( myStackNote ));
+    myNoteStack.printfNoteStack();
+
 }
