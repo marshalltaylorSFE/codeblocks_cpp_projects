@@ -1,0 +1,17 @@
+# depslib dependency file v1.0
+1429643130 source:c:\github\codeblocks_cpp_projects\examplesensorlib\src\sensor.cpp
+	"Sensor.h"
+
+1429643406 c:\github\codeblocks_cpp_projects\examplesensorlib\include\sensor.h
+	"stdint.h"
+
+1429644913 source:c:\github\codeblocks_cpp_projects\examplesensorlib\main.cpp
+	"stdint.h"
+	"Sensor.h"
+
+1429644927 source:c:\github\codeblocks_cpp_projects\examplesensorlib\sensor.cpp
+	"Sensor.h"
+
+1429644927 c:\github\codeblocks_cpp_projects\examplesensorlib\sensor.h
+	"stdint.h"
+
