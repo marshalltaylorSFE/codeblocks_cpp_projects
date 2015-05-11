@@ -9,6 +9,9 @@
 //  Written by:  Marshall Taylor
 //  Created:  March 21, 2015
 //
+//  depth 0 is 0 notes.  Shall point to null
+//
+//
 //**********************************************************************//
 
 //Includes
@@ -16,25 +19,33 @@
 #include "stdint.h"
 #include "stdio.h"
 
-//**********************************************************************//
-//  First class methods (heh.)
-//
 
-//Construct with passed max depth
+//**********************************************************************//
+//  NoteStack Class
+//
+//  Creates link list
+//
+//  Construct with passed max depth or use default 4
+//
 NoteStack::NoteStack( stackDepthVar inputDepth )
 {
-    topStackNote = 0;
-    currentDepth = 0 ;
-    maxDepth = inputDepth;
+    topStackNote = &nullNote;  //start pointed to null note
+    currentDepth = 0 ;  //Size 0
+    maxDepth = inputDepth;  //set max size
+    nullNote.noteValue = -1;  //define null note
+	nullNote.noteVelocity = -1;  //define null note
 }
 NoteStack::NoteStack( void )
 {
+    topStackNote = &nullNote;
     currentDepth = 0;
-    topStackNote = 0;
     maxDepth = 4;
+    nullNote.noteValue = -1;
+	nullNote.noteVelocity = -1;
+
 }
 
-//Pass stackNote
+//Pass stackNote to be pushed to the stack (top)
 void NoteStack::pushNote( stackNote & noteToPush )
 {
     //This creates a new note object, but then forgets the name
@@ -43,12 +54,14 @@ void NoteStack::pushNote( stackNote & noteToPush )
     //If the stack size is too big, new notes won't be accepted
     if( currentDepth < maxDepth )
     {
+		//Make a new note to the heap
         stackNote *newStackNote = new stackNote;
+		//grow stack size
         currentDepth++;
-
+		//Set the new note's params
         newStackNote->noteValue = noteToPush.noteValue;
         newStackNote->noteVelocity = noteToPush.noteVelocity;
-        //newStackNote->lowerStackNote = topStackNote;
+        //Point the top of stack to the new note
         newStackNote->lowerStackNote = topStackNote;
         topStackNote = newStackNote; //equals the address of the new note
     }
@@ -58,9 +71,10 @@ void NoteStack::pushNote( stackNote & noteToPush )
 //returns stackNote
 stackNote NoteStack::popNote( void )
 {
+	//Target note variable
     stackNote * noteToDestroy;
 
-    if(currentDepth > 0)
+    if(currentDepth > 0)//If there are any notes on the stack,
     {
         noteToDestroy = topStackNote;
         //move top pointer
@@ -68,11 +82,14 @@ stackNote NoteStack::popNote( void )
         //destruct topStackNote by topStack
         delete noteToDestroy;
         currentDepth--;
+
+        //If depth now == 0, point top to null
+        if(currentDepth == 0)
+        {
+            topStackNote = &nullNote;
+        }
     }
-    else
-    {
-        topStackNote = 0;
-    }
+
     return *topStackNote;
 }
 
@@ -83,12 +100,13 @@ stackNote NoteStack::peekNote( void )
     noteToReturn = topStackNote;
     return *noteToReturn;
 }
+
 //returns stackNote
-stackNote NoteStack::peekNote( stackDepthVar inputDepth ) //depth 0 = top
+stackNote NoteStack::peekNote( stackDepthVar inputDepth ) //position 0 = top
 {
     stackNote * noteToReturn;
 
-    if(inputDepth <= maxDepth) //Prevent out of range peeks
+    if(inputDepth < maxDepth) //Prevent out of range peeks
     {
         noteToReturn = topStackNote;
         //Iterate to the depth
@@ -99,22 +117,27 @@ stackNote NoteStack::peekNote( stackDepthVar inputDepth ) //depth 0 = top
     }
     else
     {
-        noteToReturn = 0;
+        noteToReturn = &nullNote;
     }
     return *noteToReturn;
 }
 
-//Pass position, returns stackNote
+//Pass position, returns void
 void NoteStack::dropNote( stackDepthVar depthToDrop )
 {
-    //Protect against invalid depths
+    //Check depth
     if( depthToDrop == 0 )
     {
-        popNote();
+		//If depth is 0 and there is a note on top, pop it
+		if(topStackNote != &nullNote)
+		{
+			popNote();
+		}
+
     }
-    else if( depthToDrop > currentDepth )
+    else if( depthToDrop >= currentDepth )
     {
-        //invalid, do nothing
+        //Too deep!  Do nothing.
     }
     else
     {
@@ -141,7 +164,7 @@ void NoteStack::dropNote( stackDepthVar depthToDrop )
 }
 
 //pass stackNote, returns position
-uint8_t NoteStack::seekNote( stackNote & noteToSeek )
+int8_t NoteStack::seekNote( stackNote & noteToSeek )
 {
     //Create temporary note to use for comparison
     stackNote * noteVar = new stackNote;
@@ -150,6 +173,7 @@ uint8_t NoteStack::seekNote( stackNote & noteToSeek )
 
     for(uint8_t i = 0; i < currentDepth; i++)
     {
+		//For now, only use the notevalue
         if( noteVar->noteValue == noteToSeek.noteValue )
         {
              returnVar = i;

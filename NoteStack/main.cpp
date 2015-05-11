@@ -7,7 +7,7 @@
 //  This license block is BeerWare itself.
 //
 //  Written by:  Marshall Taylor
-//  Created:  March 21, 2015
+//  Created:  420, 2015
 //
 //**********************************************************************//
 
@@ -15,12 +15,13 @@
 #include "NoteStack.h"
 #include "stdio.h"
 
+//instantiates NoteStack constructed to max depth of (n) stored notes
 NoteStack myNoteStack(5);
 
-//Globals
 
 int main( void )
 {
+    //This used to provide test note.  Can be controlled by midi
     stackNote myStackNote;
 
     myStackNote.noteValue = 24;
@@ -74,4 +75,17 @@ int main( void )
     myNoteStack.dropNote(myNoteStack.seekNote( myStackNote ));
     myNoteStack.printfNoteStack();
 
+    printf("attempt to pop 10 off\n");
+    for( int i = 0; i < 10; i++ )
+    {
+        myNoteStack.popNote();
+    }
+    myNoteStack.printfNoteStack();
+
+    printf("seeking notevalue 22\n");
+    myStackNote.noteValue = 22;
+    printf("Depth: %d\n", myNoteStack.seekNote( myStackNote ));
+
 }
+
+

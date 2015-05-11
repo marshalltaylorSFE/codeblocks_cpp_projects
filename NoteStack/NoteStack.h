@@ -18,11 +18,13 @@
 //Depth into the stack variable
 typedef uint8_t stackDepthVar;
 
+#define NULLNOTE -1
+
 //Note data type
 struct stackNote
 {
-    uint8_t noteValue;
-    uint8_t noteVelocity;
+    int8_t noteValue;
+    int8_t noteVelocity;
 
     //A pointer to the lower note
     stackNote * lowerStackNote;
@@ -39,6 +41,7 @@ class NoteStack
     //A pointer to the upper most note
 public:
     stackNote * topStackNote;
+	stackNote nullNote;
 
 public:
     NoteStack( stackDepthVar ); //Construct with passed max depth
@@ -48,7 +51,7 @@ public:
     stackNote peekNote( void );
     stackNote peekNote( stackDepthVar );
     void dropNote( stackDepthVar ); //Pass position, returns stackNote
-    uint8_t seekNote( stackNote & ); //pass stackNote, returns position
+    int8_t seekNote( stackNote & ); //pass stackNote, returns position
     stackDepthVar stackDepth( void ); //returns depth of stack.
     void printfNoteStack( void );
 

@@ -11,11 +11,11 @@
 	"NoteStack.h"
 	"stdio.h"
 
-1429421455 source:d:\github\codeblocks_cpp_projects\notestack\main.cpp
+1429579839 source:d:\github\codeblocks_cpp_projects\notestack\main.cpp
 	"NoteStack.h"
 	"stdio.h"
 
-1429413014 d:\github\codeblocks_cpp_projects\notestack\notestack.h
+1429579876 d:\github\codeblocks_cpp_projects\notestack\notestack.h
 	"stdint.h"
 
 1429514693 source:c:\github\codeblocks_cpp_projects\notestack\main.cpp
@@ -26,6 +26,11 @@
 	"stdint.h"
 
 1429514577 source:c:\github\codeblocks_cpp_projects\notestack\notestack.cpp
+	"NoteStack.h"
+	"stdint.h"
+	"stdio.h"
+
+1429579713 source:d:\github\codeblocks_cpp_projects\notestack\notestack.cpp
 	"NoteStack.h"
 	"stdint.h"
 	"stdio.h"
