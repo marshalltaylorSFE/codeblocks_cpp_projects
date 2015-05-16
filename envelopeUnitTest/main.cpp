@@ -41,16 +41,16 @@ Envelope myEnvelope2;
 int main( void )
 {
 
-    myEnvelope.setSustain( 110 );
+    myEnvelope.setSustain( 0 );
     myEnvelope.setAttack( 50, 100 );
-    myEnvelope.setDecay( 255, 60 );
+    myEnvelope.setDecay( 193, 60 );
     myEnvelope.setRelease( 150, -80 );
     myEnvelope.setAttackHold( 255 );
 
     myEnvelope2.setSustain( 160 );
     myEnvelope2.setAttack( 200, 100 );
-    myEnvelope2.setDecay( 255, 60 );
-    myEnvelope2.setRelease( 150, -35 );
+    myEnvelope2.setDecay( 50, 60 );
+    myEnvelope2.setRelease( 50, -35 );
     myEnvelope2.setAttackHold( 255 );
     long msTicks = 0;
     long lastService = 0;
@@ -192,17 +192,21 @@ int main( void )
     events[0][1] = 1;
     events[0][2] = 0;
 
-    events[1][0] = 3000;
-    events[1][1] = 0;
+    events[1][0] = 2000;
+    events[1][1] = 1;
     events[1][2] = 0;
 
-    events[2][0] = 6000;
-    events[2][1] = 1;
+    events[2][0] = 3000;
+    events[2][1] = 0;
     events[2][2] = 0;
 
-    events[3][0] = 6300;
-    events[3][1] = 0;
+    events[3][0] = 6000;
+    events[3][1] = 1;
     events[3][2] = 0;
+
+    events[4][0] = 6300;
+    events[4][1] = 0;
+    events[4][2] = 0;
 
     events[9][0] = 10000;
     events[9][1] = 255; //quit
@@ -282,6 +286,9 @@ int main( void )
                     break;
                 case 1:
                     myEnvelope.setNoteOn();
+                    break;
+                case 12:
+                    myEnvelope.setSustain( 255 );
                     break;
                 case 255:
                     noQuit = 0;

@@ -14,7 +14,6 @@
 //Includes
 #include "envelope.h"
 #include "math.h"
-#include "stdio.h"
 
 //**********************************************************************//
 //  Envelope Constructor
@@ -108,7 +107,8 @@ void Envelope::tick( uint8_t msElapsed )
         }
         break;
     case SM_DECAY:
-        if( amp > envSustain.level )  //Always get to sustain level before advancing
+        //if( amp > envSustain.level )  //Always get to sustain level before advancing
+        if( mainTimeKeeper.mGet() < getDecay() )  //Always get to sustain level before advancing
         {
             changeAmp( envDecay, mainTimeKeeper.mGet(), state, amp );
         }
@@ -124,7 +124,7 @@ void Envelope::tick( uint8_t msElapsed )
             next_state = SM_POST_DECAY;
 
         }
-        else if( (noteState == NOTE_OFF)&&( amp <= envSustain.level ))
+        else if( (noteState == NOTE_OFF)&&( mainTimeKeeper.mGet() > getDecay() ))
         {
             mainTimeKeeper.mClear();
             next_state = SM_RELEASE;
@@ -132,14 +132,14 @@ void Envelope::tick( uint8_t msElapsed )
         break;
     case SM_POST_DECAY:
         //Decay the main until sustain
-        if( amp > envSustain.level )
+        if( mainTimeKeeper.mGet() < getDecay() )
         {
             changeAmp( envDecay, mainTimeKeeper.mGet(), state, amp );
         }
         // else do nothing
         //Attack the shadow
         changeAmp( envAttack, shadowTimeKeeper.mGet(), SM_ATTACK, shadowAmp );
-        if( shadowAmp > amp ) //It's time to move
+        if( shadowAmp >= amp ) //It's time to move
         {
             next_state = SM_ATTACK;
             //Now, copy the shadow to the main
@@ -171,6 +171,7 @@ void Envelope::tick( uint8_t msElapsed )
         }
         else  //it does equal note off
         {
+            //if( mainTimeKeeper.mGet() < getDecay() )
             if( amp > 0 )
             {
                 changeAmp( envRelease, mainTimeKeeper.mGet(), state, amp );
@@ -297,16 +298,21 @@ void Envelope::setNoteOff()
 void Envelope::setAttack( uint8_t var_attack, int8_t var_power )
 {
     //Scale 0-255 input parameters to the appropriate phase range in ms
-    envAttack.timeScale = (((uint32_t)var_attack * 1000) >> 8);
+    envAttack.timeScale = (((uint32_t)var_attack * MAX_ATTACK_MS) >> 8);
     envAttack.powerScale = var_power;
 
 }
 
 void Envelope::setDecay( uint8_t var_decay, int8_t var_power )
 {
-    envDecay.timeScale = (((uint32_t)var_decay * 1000) >> 8);
+    envDecay.timeScale = (((uint32_t)var_decay * MAX_DECAY_MS) >> 8);
     envDecay.powerScale = var_power;
 
+}
+
+uint16_t Envelope::getDecay( void )
+{
+  return envDecay.timeScale;
 }
 
 void Envelope::setSustain( uint8_t var_sustain )
@@ -323,7 +329,7 @@ uint8_t LevelParameter::getLevel( void )
 
 void Envelope::setRelease( uint8_t var_release, int8_t var_power )
 {
-    envRelease.timeScale = (((uint32_t)var_release * 5000) >> 8);
+    envRelease.timeScale = (((uint32_t)var_release * MAX_RELEASE_MS) >> 8);
     envRelease.powerScale = var_power;
 
 }

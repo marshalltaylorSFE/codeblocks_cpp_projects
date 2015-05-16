@@ -30,6 +30,11 @@
 #define NOTE_ON 1
 #define NOTE_NEW 2
 
+//Knob range scaling
+#define MAX_ATTACK_MS 1000
+#define MAX_DECAY_MS 1000
+#define MAX_RELEASE_MS 5000
+
 class RateParameter
 {
 public:
@@ -78,6 +83,7 @@ public:
   void setNoteOff( void );
   void setAttack( uint8_t, int8_t );
   void setDecay( uint8_t, int8_t );
+  uint16_t getDecay( void );
   void setSustain( uint8_t );
   void setRelease( uint8_t, int8_t );
   void setAttackHold( uint8_t );

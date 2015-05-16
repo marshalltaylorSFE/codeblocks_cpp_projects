@@ -19,6 +19,10 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="bitmap_image.hpp" />
+		<Unit filename="main.cpp" />
+		<Unit filename="wavegen.cpp" />
+		<Unit filename="wavegen.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

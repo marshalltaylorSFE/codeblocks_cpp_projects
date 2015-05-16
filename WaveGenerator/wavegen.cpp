@@ -1,7 +1,3 @@
-#include "math.h"
-#include "wavegen.h"
-#include "arduino.h"
-
 //--------------------------------------------------------------------------------------
 // Generates a single sample of a 256 sample long waveform
 //
@@ -10,58 +6,75 @@
 // char sample is 0x00 to 0xFF
 //
 // Shapes are ~ +-127, scaled by amp/100, then output ranged 0 to 255 (but type int)
-int get_sample(uint8_t shape, float amp, float duty, uint8_t sample)
+#include "math.h"
+#include "wavegen.h"
+
+
+WaveGenerator::WaveGenerator( void )
 {
-	int ret_val;
-	float ret_calc_var1;
-	
-	switch ( shape )
-	{
-	case SINESHAPE:
-		//use the cmath (math.h) header
-		//This function could be faster if some of the conversion was offloaded
-		ret_calc_var1 = 0x7F * sin(((float)sample * 3.141592)/128);
-		break;
-	case PULSESHAPE:
+    masterAmp = 0;
+    rampAmp = 0;
+    sineAmp = 0;
+    pulseAmp = 0;
+    pulseDuty = 0;
+    sampleNumber = 0;
+
+}
+
+void WaveGenerator::resetOffset( void )
+{
+    sampleNumber = 0;
+
+}
+
+
+uint8_t WaveGenerator::getSample( void )
+{
+    int8_t tempRamp = 0;
+    int8_t tempSine = 0;
+    int8_t tempPulse = 0;
+    uint8_t retVal;
+
+    if(rampAmp)
+    {
+        tempRamp = ((((int16_t)sampleNumber) - 127 ) * rampAmp) / 255;
+    }
+
+    if( sineAmp )
+    {
+        tempSine = int8_t((int16_t)(127 * sin(((float)sampleNumber * 3.141592)/128)) * sineAmp / 255);
+    }
+
+    if( pulseAmp )
+    {
 		//Is sample beyond duty cycle?
-		if (sample > (uint8_t)(255 * duty))
+		if ( sampleNumber < pulseDuty )
 		{
-			//is later than duty
-			ret_calc_var1 = -127;
+			tempPulse = int8_t( pulseAmp >> 1 );
 		}
 		else
 		{
-			//is earlier
-			ret_calc_var1 = 128;
+			tempPulse = int8_t(pulseAmp >> 1 ) * -1;
 		}
-	    break;
-	case RAMPSHAPE:
-		//essentially returns input sample
-		ret_calc_var1 = 127 * (((float)sample/255) - 0.5);
-	    break;
-	case DCSHAPE:
-		//Will use amplitude as DC setting
-		ret_calc_var1 = 0;
-	    break;
-	default:
-	    break;
-	}
+    }
 
-	//Provide scaling and center here
-	if ((amp > 1)||(amp <= 0))
-	{
-		//Invalid amp.  Set to 1 but say nothing.
-		amp = 1;
-	}
-
-	// Scale here
-	ret_calc_var1 = ret_calc_var1 * amp;
-        ret_calc_var1 = ret_calc_var1 + 0x7F;
-
-	//cast
-	ret_val = (unsigned int)ret_calc_var1;
+    sampleNumber++;
 
 
-	return ret_val;
+ 	//cast
+	retVal = (uint8_t)(((((int16_t)tempRamp + (int16_t)tempSine + (int16_t)tempPulse) / 3) * masterAmp / 255 ) + 128);
+
+    return retVal;
+
 }
+
+void WaveGenerator::setParameters( uint8_t masterAmpVar, uint8_t rampAmpVar, uint8_t sineAmpVar, uint8_t pulseAmpVar, uint8_t pulseDutyVar )
+{
+    masterAmp = masterAmpVar;
+    rampAmp = rampAmpVar;
+    sineAmp = sineAmpVar;
+    pulseAmp = pulseAmpVar;
+    pulseDuty = pulseDutyVar;
+}
+
 

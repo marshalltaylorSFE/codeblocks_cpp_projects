@@ -1,0 +1,31 @@
+# depslib dependency file v1.0
+1431751754 source:d:\github\codeblocks_cpp_projects\wavegenerator\main.cpp
+	"wavegen.h"
+	"stdio.h"
+	"conio.h"
+	<windows.h>
+	"stdint.h"
+	<iostream>
+	<fstream>
+	<cstdlib>
+	<iostream>
+	<string>
+	"bitmap_image.hpp"
+
+1431745928 d:\github\codeblocks_cpp_projects\wavegenerator\wavegen.h
+	"stdint.h"
+
+946710000 d:\github\codeblocks_cpp_projects\wavegenerator\bitmap_image.hpp
+	<algorithm>
+	<cmath>
+	<cstdlib>
+	<fstream>
+	<iostream>
+	<iterator>
+	<limits>
+	<string>
+
+1431751996 source:d:\github\codeblocks_cpp_projects\wavegenerator\wavegen.cpp
+	"math.h"
+	"wavegen.h"
+
