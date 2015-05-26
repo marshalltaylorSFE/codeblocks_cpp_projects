@@ -1,0 +1,48 @@
+# depslib dependency file v1.0
+1431804373 source:d:\github\codeblocks_cpp_projects\colorstatemachine\envelope.cpp
+	"envelope.h"
+	"math.h"
+
+1431804373 d:\github\codeblocks_cpp_projects\colorstatemachine\envelope.h
+	"stdint.h"
+
+1432610874 source:d:\github\codeblocks_cpp_projects\colorstatemachine\colortools.cpp
+	"colorTools.h"
+
+1432610820 d:\github\codeblocks_cpp_projects\colorstatemachine\colortools.h
+	"stdint.h"
+
+1432599821 source:d:\github\codeblocks_cpp_projects\colorstatemachine\ledtuning.cpp
+	"ledTuning.h"
+	"stdint.h"
+	"math.h"
+
+1432605564 d:\github\codeblocks_cpp_projects\colorstatemachine\ledtuning.h
+	"stdint.h"
+
+1432611295 source:d:\github\codeblocks_cpp_projects\colorstatemachine\main.cpp
+	"stdio.h"
+	"conio.h"
+	<windows.h>
+	"stdint.h"
+	"colorTools.h"
+	<iostream>
+	<fstream>
+	<cstdlib>
+	<iostream>
+	<string>
+	"bitmap_image.hpp"
+
+946710000 d:\github\codeblocks_cpp_projects\colorstatemachine\bitmap_image.hpp
+	<algorithm>
+	<cmath>
+	<cstdlib>
+	<fstream>
+	<iostream>
+	<iterator>
+	<limits>
+	<string>
+
+1432606766 d:\github\codeblocks_cpp_projects\colorstatemachine\colortools.cpp
+	"colorTools.h"
+
