@@ -1,0 +1,65 @@
+# depslib dependency file v1.0
+1435429057 source:d:\github\codeblocks_cpp_projects\cappmidiexample\main.cpp
+	"stdio.h"
+	"stdint.h"
+	"MidiFile.h"
+	"Options.h"
+	<iostream>
+	<iomanip>
+
+1435428720 d:\github\codeblocks_cpp_projects\cappmidiexample\midifile.h
+	"MidiEventList.h"
+	<vector>
+	<istream>
+	<fstream>
+
+1435428720 d:\github\codeblocks_cpp_projects\cappmidiexample\midieventlist.h
+	"MidiEvent.h"
+	<vector>
+
+1435428720 d:\github\codeblocks_cpp_projects\cappmidiexample\midievent.h
+	"MidiMessage.h"
+	<vector>
+
+1435428720 d:\github\codeblocks_cpp_projects\cappmidiexample\midimessage.h
+	<vector>
+
+1435428720 d:\github\codeblocks_cpp_projects\cappmidiexample\options.h
+	<vector>
+	<map>
+	<string>
+
+1435429186 source:d:\github\codeblocks_cpp_projects\cappmidiexample\binasc.cpp
+	"Binasc.h"
+	<sstream>
+	<string.h>
+	<stdlib.h>
+
+1435428720 d:\github\codeblocks_cpp_projects\cappmidiexample\binasc.h
+	<iostream>
+	<fstream>
+
+1435428720 source:d:\github\codeblocks_cpp_projects\cappmidiexample\midievent.cpp
+	"MidiEvent.h"
+	<stdlib.h>
+
+1435428720 source:d:\github\codeblocks_cpp_projects\cappmidiexample\midieventlist.cpp
+	"MidiEventList.h"
+	<vector>
+	<iostream>
+
+1435429210 source:d:\github\codeblocks_cpp_projects\cappmidiexample\midifile.cpp
+	"MidiFile.h"
+	"Binasc.h"
+	<string.h>
+	<iostream>
+	<iomanip>
+	<fstream>
+	<sstream>
+	<stdlib.h>
+
+1435428720 source:d:\github\codeblocks_cpp_projects\cappmidiexample\midimessage.cpp
+	"MidiMessage.h"
+	<vector>
+	<iostream>
+

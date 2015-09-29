@@ -1,0 +1,26 @@
+# depslib dependency file v1.0
+1436507364 source:d:\github\codeblocks_cpp_projects\voiceunittest\main.cpp
+	"stdio.h"
+	"conio.h"
+	<windows.h>
+	"stdint.h"
+	"SynthVoice.h"
+
+1436507376 d:\github\codeblocks_cpp_projects\voiceunittest\synthvoice.h
+
+1426128609 source:d:\github\codeblocks_cpp_projects\voiceunittest\note_values.c
+
+1436506786 source:d:\github\codeblocks_cpp_projects\voiceunittest\wavegen.cpp
+	"math.h"
+	"wavegen.h"
+
+1431754643 d:\github\codeblocks_cpp_projects\voiceunittest\wavegen.h
+	"stdint.h"
+
+1436507545 source:d:\github\codeblocks_cpp_projects\voiceunittest\synthvoice.cpp
+	"wavegen.h"
+	"note_values.h"
+	"SynthVoice.h"
+
+1426128609 d:\github\codeblocks_cpp_projects\voiceunittest\note_values.h
+
