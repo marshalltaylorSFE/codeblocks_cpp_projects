@@ -41,16 +41,16 @@ Envelope myEnvelope2;
 int main( void )
 {
 
-    myEnvelope.setSustain( 0 );
+    myEnvelope.setSustain( 100 );
     myEnvelope.setAttack( 50, 100 );
     myEnvelope.setDecay( 193, 60 );
-    myEnvelope.setRelease( 150, -80 );
+    myEnvelope.setRelease( 50, 80 );
     myEnvelope.setAttackHold( 255 );
 
-    myEnvelope2.setSustain( 160 );
-    myEnvelope2.setAttack( 200, 100 );
+    myEnvelope2.setSustain( 110 );
+    myEnvelope2.setAttack( 200, -127 );
     myEnvelope2.setDecay( 50, 60 );
-    myEnvelope2.setRelease( 50, -35 );
+    myEnvelope2.setRelease( 50, 35 );
     myEnvelope2.setAttackHold( 255 );
     long msTicks = 0;
     long lastService = 0;

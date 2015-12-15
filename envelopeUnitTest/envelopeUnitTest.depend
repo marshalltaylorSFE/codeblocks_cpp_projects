@@ -26,15 +26,14 @@
 	<string>
 	"bitmap_image.hpp"
 
-1431797487 source:d:\github\codeblocks_cpp_projects\envelopeunittest\envelope.cpp
+1431800773 source:d:\github\codeblocks_cpp_projects\envelopeunittest\envelope.cpp
 	"envelope.h"
 	"math.h"
-	"stdio.h"
 
-1431804373 d:\github\codeblocks_cpp_projects\envelopeunittest\envelope.h
+1431800773 d:\github\codeblocks_cpp_projects\envelopeunittest\envelope.h
 	"stdint.h"
 
-1431798730 source:d:\github\codeblocks_cpp_projects\envelopeunittest\main.cpp
+1450165926 source:d:\github\codeblocks_cpp_projects\envelopeunittest\main.cpp
 	"envelope.h"
 	"stdio.h"
 	"conio.h"
@@ -47,7 +46,7 @@
 	<string>
 	"bitmap_image.hpp"
 
-946710000 d:\github\codeblocks_cpp_projects\envelopeunittest\bitmap_image.hpp
+946706400 d:\github\codeblocks_cpp_projects\envelopeunittest\bitmap_image.hpp
 	<algorithm>
 	<cmath>
 	<cstdlib>
