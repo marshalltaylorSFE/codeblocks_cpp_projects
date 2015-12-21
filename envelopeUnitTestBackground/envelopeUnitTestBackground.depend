@@ -1,0 +1,64 @@
+# depslib dependency file v1.0
+1431800773 source:d:\github\codeblocks_cpp_projects\envelopeunittestbackground\envelope.cpp
+	"envelope.h"
+	"math.h"
+
+1431800773 d:\github\codeblocks_cpp_projects\envelopeunittestbackground\envelope.h
+	"stdint.h"
+
+1450681371 source:d:\github\codeblocks_cpp_projects\envelopeunittestbackground\main.cpp
+	"effect_bendvelope.h"
+	"stdio.h"
+	"conio.h"
+	<windows.h>
+	"stdint.h"
+	<cstdlib>
+	<iostream>
+	<string>
+	"graphWrapper.h"
+	"timeKeeper32.h"
+	"timerModule32.h"
+
+1450649519 d:\github\codeblocks_cpp_projects\envelopeunittestbackground\graphwrapper.h
+	<iostream>
+	<fstream>
+	"bitmap_image.hpp"
+
+946706400 d:\github\codeblocks_cpp_projects\envelopeunittestbackground\bitmap_image.hpp
+	<algorithm>
+	<cmath>
+	<cstdlib>
+	<fstream>
+	<iostream>
+	<iterator>
+	<limits>
+	<string>
+
+1450671417 source:d:\github\codeblocks_cpp_projects\envelopeunittestbackground\graphwrapper.cpp
+	<iostream>
+	<fstream>
+	"bitmap_image.hpp"
+	"graphWrapper.h"
+
+1444285062 d:\github\codeblocks_cpp_projects\envelopeunittestbackground\timekeeper32.h
+	"stdint.h"
+
+1450653828 source:d:\github\codeblocks_cpp_projects\envelopeunittestbackground\timekeeper32.cpp
+	"timeKeeper32.h"
+
+1450679978 source:d:\github\codeblocks_cpp_projects\envelopeunittestbackground\effect_bendvelope.cpp
+	"effect_bendvelope.h"
+	"stdint.h"
+	"timeKeeper32.h"
+	<math.h>
+
+1450684579 d:\github\codeblocks_cpp_projects\envelopeunittestbackground\effect_bendvelope.h
+	"stdint.h"
+	"timeKeeper32.h"
+
+1444285062 source:d:\github\codeblocks_cpp_projects\envelopeunittestbackground\timermodule32.cpp
+	"timerModule32.h"
+
+1444285062 d:\github\codeblocks_cpp_projects\envelopeunittestbackground\timermodule32.h
+	"stdint.h"
+

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="envelopeUnitTestBackground" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/envelopeUnitTestBackground" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+		</Compiler>
+		<Unit filename="bitmap_image.hpp" />
+		<Unit filename="effect_bendvelope.cpp" />
+		<Unit filename="effect_bendvelope.h" />
+		<Unit filename="graphWrapper.cpp" />
+		<Unit filename="graphWrapper.h" />
+		<Unit filename="main.cpp" />
+		<Unit filename="pixelGL.h" />
+		<Unit filename="timeKeeper32.cpp" />
+		<Unit filename="timeKeeper32.h" />
+		<Unit filename="timerModule32.cpp" />
+		<Unit filename="timerModule32.h" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
