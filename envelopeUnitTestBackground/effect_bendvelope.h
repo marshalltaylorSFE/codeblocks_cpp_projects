@@ -35,11 +35,18 @@ class BendTable
 public:
     BendTable( void );
 
-    void calculate( RateParameter&, int32_t, int32_t, int8_t, int8_t );
-    int32_t * getSample( int32_t );
+    void calculate( int32_t, int32_t, int8_t, int8_t );
+    int32_t getSample( int32_t );
+    int32_t getSampleByTime( uint32_t ); //in microseconds
     uint32_t timeDiv;
+    uint32_t timeScale;
+    int8_t powerScale;
+	uint32_t maxTime;
+	uint8_t knobFactor;
+
 private:
     int32_t data[256];
+
 };
 
 class AudioEffectBendvelope
@@ -72,16 +79,13 @@ private:
 	//uint16_t count;  // how much time remains in this state, in 8 sample units
 	int32_t  mult;   // attenuation, 0=off, 0x10000=unity gain
 
+
 public:
 	uint8_t noteState;
 
 	uint8_t amp;
 	uint8_t shadowAmp;
 private:
-
-	void changeAmp( RateParameter&, uint32_t, uint8_t, uint8_t& );
-	void changeAmp( LevelParameter&, uint8_t& );
-	void changeAmp( uint8_t, uint8_t& );
 
 	//Timekeepers are modified logical counter modules
 	TimeKeeper32 mainTimeKeeper;

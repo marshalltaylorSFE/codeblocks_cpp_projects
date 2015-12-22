@@ -49,7 +49,7 @@ int main( void )
     TimerClass32 debugTimer( 1000000 );
 
 	//Setting envelope
-	bendvelope.attack( 20, 0 );// 0 to 255 for length, -128 to 127
+	bendvelope.attack( 200, 0 );// 0 to 255 for length, -128 to 127
 	bendvelope.decay( 255, 100 );// 0 to 255 for length, -128 to 127
 	bendvelope.sustain( 150 );// 0 to 255 for level
 	bendvelope.release( 30, 0 );// 0 to 255 for length, -128 to 127
@@ -81,7 +81,7 @@ int main( void )
         {
             bendvelope.noteOn();
         }
-        if( usTicks == 1600000 )
+        if( usTicks == 500000 )
         {
             bendvelope.noteOff();
         }
@@ -93,6 +93,7 @@ int main( void )
             bendvelope.tick(1000);
 
             outputGraph.plotPoint((usTicks / 1000 / 2),bendvelope.amp, grid1);
+            //outputGraph.plotPoint((usTicks / 1000 / 2),bendvelope.positionLHS, grid1);
             outputGraph.plotPoint((usTicks / 1000 / 2),bendvelope.noteState * 50, grid2);
             outputGraph.plotPoint((usTicks / 1000 / 2),bendvelope.state * 75, grid4);
 
@@ -101,29 +102,29 @@ int main( void )
         {
         }
         //Print out test table
-        int32_t * tempSample;
+        int32_t tempSample;
         if(usTicks < 256)
         {
             tempSample = bendvelope.testTable.getSample(usTicks);
-            outputGraph.plotPoint((usTicks),*tempSample, grid3);
+            outputGraph.plotPoint((usTicks),tempSample, grid3);
         }
         //Print out test table
         if((usTicks < 512)&&(usTicks >= 256 ))
         {
             tempSample = bendvelope.attackTable.getSample(usTicks - 256);
-            outputGraph.plotPoint((usTicks),*tempSample, grid3);
+            outputGraph.plotPoint((usTicks),tempSample, grid3);
         }
         //Print out test table
         if((usTicks < 768)&&(usTicks >= 512 ))
         {
             tempSample = bendvelope.decayTable.getSample(usTicks - 512);
-            outputGraph.plotPoint((usTicks),*tempSample, grid3);
+            outputGraph.plotPoint((usTicks),tempSample, grid3);
         }
         //Print out test table
         if((usTicks < 1024)&&(usTicks >= 768 ))
         {
             tempSample = bendvelope.releaseTable.getSample(usTicks - 768);
-            outputGraph.plotPoint((usTicks),*tempSample, grid3);
+            outputGraph.plotPoint((usTicks),tempSample, grid3);
         }
         usTicks++;
 

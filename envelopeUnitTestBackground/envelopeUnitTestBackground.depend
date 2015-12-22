@@ -6,7 +6,7 @@
 1431800773 d:\github\codeblocks_cpp_projects\envelopeunittestbackground\envelope.h
 	"stdint.h"
 
-1450681371 source:d:\github\codeblocks_cpp_projects\envelopeunittestbackground\main.cpp
+1450773323 source:d:\github\codeblocks_cpp_projects\envelopeunittestbackground\main.cpp
 	"effect_bendvelope.h"
 	"stdio.h"
 	"conio.h"
@@ -46,13 +46,13 @@
 1450653828 source:d:\github\codeblocks_cpp_projects\envelopeunittestbackground\timekeeper32.cpp
 	"timeKeeper32.h"
 
-1450679978 source:d:\github\codeblocks_cpp_projects\envelopeunittestbackground\effect_bendvelope.cpp
+1450773297 source:d:\github\codeblocks_cpp_projects\envelopeunittestbackground\effect_bendvelope.cpp
 	"effect_bendvelope.h"
 	"stdint.h"
 	"timeKeeper32.h"
 	<math.h>
 
-1450684579 d:\github\codeblocks_cpp_projects\envelopeunittestbackground\effect_bendvelope.h
+1450767089 d:\github\codeblocks_cpp_projects\envelopeunittestbackground\effect_bendvelope.h
 	"stdint.h"
 	"timeKeeper32.h"
 
