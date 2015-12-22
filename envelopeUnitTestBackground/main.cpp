@@ -81,9 +81,13 @@ int main( void )
         {
             bendvelope.noteOn();
         }
-        if( usTicks == 500000 )
+        if( usTicks == 600000 )
         {
             bendvelope.noteOff();
+        }
+        if( usTicks == 650000 )
+        {
+            bendvelope.noteOn();
         }
        	envTimer.update(usTicks);
         debugTimer.update(usTicks);

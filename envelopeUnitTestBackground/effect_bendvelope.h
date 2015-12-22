@@ -38,6 +38,8 @@ public:
     void calculate( int32_t, int32_t, int8_t, int8_t );
     int32_t getSample( int32_t );
     int32_t getSampleByTime( uint32_t ); //in microseconds
+    uint32_t getPositionBySample( int32_t SampleVar );
+    uint32_t getTimeBySample( int32_t SampleVar );
     uint32_t timeDiv;
     uint32_t timeScale;
     int8_t powerScale;
@@ -46,6 +48,8 @@ public:
 
 private:
     int32_t data[256];
+    int32_t positionLookup[256];
+    int16_t direction;
 
 };
 
