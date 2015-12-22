@@ -37,6 +37,7 @@ public:
 
     void calculate( RateParameter&, int32_t, int32_t, int8_t, int8_t );
     int32_t * getSample( int32_t );
+    uint32_t timeDiv;
 private:
     int32_t data[256];
 };
@@ -61,9 +62,13 @@ public:
 	virtual void update(void);
 	void tick( uint32_t );
     BendTable testTable;
+    BendTable attackTable;
+    BendTable decayTable;
+    BendTable releaseTable;
+
+	uint8_t  state;  // idle, delay, attack, hold, decay, sustain, release
 private:
 	// state
-	uint8_t  state;  // idle, delay, attack, hold, decay, sustain, release
 	//uint16_t count;  // how much time remains in this state, in 8 sample units
 	int32_t  mult;   // attenuation, 0=off, 0x10000=unity gain
 

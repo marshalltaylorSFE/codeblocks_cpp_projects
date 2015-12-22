@@ -72,7 +72,8 @@ int main( void )
 
     grid1.setColor(255,0,0);
     grid2.setColor(0,127,0);
-    grid3.setColor(200,200,50);
+    grid3.setColor(200,20,200);
+    grid4.setColor(255,127,0);
 
     while( usTicks < 2000000 )
     {
@@ -93,6 +94,7 @@ int main( void )
 
             outputGraph.plotPoint((usTicks / 1000 / 2),bendvelope.amp, grid1);
             outputGraph.plotPoint((usTicks / 1000 / 2),bendvelope.noteState * 50, grid2);
+            outputGraph.plotPoint((usTicks / 1000 / 2),bendvelope.state * 75, grid4);
 
         }
         if(debugTimer.flagStatus() == PENDING)
@@ -103,6 +105,24 @@ int main( void )
         if(usTicks < 256)
         {
             tempSample = bendvelope.testTable.getSample(usTicks);
+            outputGraph.plotPoint((usTicks),*tempSample, grid3);
+        }
+        //Print out test table
+        if((usTicks < 512)&&(usTicks >= 256 ))
+        {
+            tempSample = bendvelope.attackTable.getSample(usTicks - 256);
+            outputGraph.plotPoint((usTicks),*tempSample, grid3);
+        }
+        //Print out test table
+        if((usTicks < 768)&&(usTicks >= 512 ))
+        {
+            tempSample = bendvelope.decayTable.getSample(usTicks - 512);
+            outputGraph.plotPoint((usTicks),*tempSample, grid3);
+        }
+        //Print out test table
+        if((usTicks < 1024)&&(usTicks >= 768 ))
+        {
+            tempSample = bendvelope.releaseTable.getSample(usTicks - 768);
             outputGraph.plotPoint((usTicks),*tempSample, grid3);
         }
         usTicks++;

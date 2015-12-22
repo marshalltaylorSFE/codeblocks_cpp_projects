@@ -35,8 +35,9 @@ AudioEffectBendvelope::AudioEffectBendvelope()
 BendTable::BendTable( void )
 {
     RateParameter initParam;
-    initParam.powerScale = 100;
+    initParam.powerScale = 0;
     calculate( initParam, 255, 0, 1, 1 );
+    timeDiv = 1000000 * 127; //maxNAME * time-scale
 }
 
 void BendTable::calculate( RateParameter& param, int32_t upperVar, int32_t lowerVar, int8_t polarity, int8_t direction )
@@ -72,7 +73,6 @@ void BendTable::calculate( RateParameter& param, int32_t upperVar, int32_t lower
         {
             ampTemp = 0;
         }
-
         data[timeVar] = (lowerVar + ( polarity * ampTemp ));
     }
 
@@ -80,6 +80,10 @@ void BendTable::calculate( RateParameter& param, int32_t upperVar, int32_t lower
 
 int32_t * BendTable::getSample( int32_t sampleVar )
 {
+    if(sampleVar > 255)
+    {
+        sampleVar = 255;
+    }
     int32_t * pointer;
     pointer = &data[sampleVar];
     return pointer;
@@ -139,6 +143,7 @@ void AudioEffectBendvelope::tick( uint32_t uTicks )
 	// Let the timers know how may useconds have passed
 	mainTimeKeeper.uIncrement(uTicks);
 	shadowTimeKeeper.uIncrement(uTicks);
+    uint32_t timeTemp;
 
 	//State machine
 	uint8_t next_state = state;
@@ -163,7 +168,7 @@ void AudioEffectBendvelope::tick( uint32_t uTicks )
 		else if( noteState == NOTE_OFF )
 		{
 			//keep attacking this state
-			changeAmp( envAttack, mainTimeKeeper.uGet(), state, amp );
+			//changeAmp( envAttack, mainTimeKeeper.uGet(), state, amp );
 
 			shadowTimeKeeper.uClear();
 
@@ -189,7 +194,11 @@ void AudioEffectBendvelope::tick( uint32_t uTicks )
 				noteState = NOTE_ON;
 			}
 			//change amp
-			changeAmp( envAttack, mainTimeKeeper.uGet(), state, amp );
+			//changeAmp( envAttack, mainTimeKeeper.uGet(), state, amp );
+            timeTemp = (uint32_t) mainTimeKeeper.uGet() << 14;
+            timeTemp = timeTemp / attackTable.timeDiv;
+            timeTemp = timeTemp << 2;
+            amp = *attackTable.getSample(timeTemp);
 		}
 		break;
 	case SM_PRE_DECAY:
@@ -214,10 +223,14 @@ void AudioEffectBendvelope::tick( uint32_t uTicks )
 		}
 		break;
 	case SM_DECAY:
-		//if( amp > envSustain.level )  //Always get to sustain level before advancing
-		if( mainTimeKeeper.uGet() < getDecay() )  //Always get to sustain level before advancing
+		if( amp > envSustain.level )  //Always get to sustain level before advancing
+		//if( mainTimeKeeper.uGet() < getDecay() )  //Always get to sustain level before advancing
 		{
-			changeAmp( envDecay, mainTimeKeeper.uGet(), state, amp );
+			//changeAmp( envDecay, mainTimeKeeper.uGet(), state, amp );
+			timeTemp = (uint32_t) mainTimeKeeper.uGet() << 14;
+            timeTemp = timeTemp / decayTable.timeDiv;
+            timeTemp = timeTemp << 2;
+            amp = *decayTable.getSample(timeTemp);
 		}
 		//If there is a new note, start attacking
 		if( noteState == NOTE_NEW )
@@ -399,6 +412,8 @@ void AudioEffectBendvelope::attack( uint8_t var_attack, int8_t var_power )
     //Scale 0-255 input parameters to the appropriate phase range in ms
     envAttack.timeScale = (((uint32_t)var_attack * maxAttack) >> 8);
     envAttack.powerScale = var_power;
+    attackTable.calculate( envAttack, 255, 0, 1, 1 );
+    attackTable.timeDiv = var_attack * maxAttack;
 
 }
 
@@ -406,7 +421,8 @@ void AudioEffectBendvelope::decay( uint8_t var_decay, int8_t var_power )
 {
     envDecay.timeScale = (((uint32_t)var_decay * maxDecay) >> 8);
     envDecay.powerScale = var_power;
-
+    decayTable.calculate( envDecay, 255, envSustain.level, 1, -1 );
+    decayTable.timeDiv = var_decay * maxDecay;
 }
 
 uint32_t AudioEffectBendvelope::getDecay( void )
@@ -417,6 +433,8 @@ uint32_t AudioEffectBendvelope::getDecay( void )
 void AudioEffectBendvelope::sustain( uint8_t var_sustain )
 {
     envSustain.level = var_sustain;
+    decayTable.calculate( envDecay, 255, envSustain.level, 1, -1 );
+    releaseTable.calculate( envRelease, envSustain.level, 0, -1, 1 );
 
 }
 
@@ -424,7 +442,8 @@ void AudioEffectBendvelope::release( uint8_t var_release, int8_t var_power )
 {
     envRelease.timeScale = (((uint32_t)var_release * maxRelease) >> 8);
     envRelease.powerScale = var_power;
-
+    releaseTable.calculate( envRelease, envSustain.level, 0, -1, 1 );
+    releaseTable.timeDiv = var_release * maxRelease;
 }
 
 void AudioEffectBendvelope::setAttackHold( uint8_t var_attackHold )
