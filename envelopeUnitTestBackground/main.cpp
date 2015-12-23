@@ -49,7 +49,7 @@ int main( void )
     TimerClass32 debugTimer( 1000000 );
 
 	//Setting envelope
-	bendvelope.attack( 200, 0 );// 0 to 255 for length, -128 to 127
+	bendvelope.attack( 65, 35 );// 0 to 255 for length, -128 to 127
 	bendvelope.decay( 255, 100 );// 0 to 255 for length, -128 to 127
 	bendvelope.sustain( 150 );// 0 to 255 for level
 	bendvelope.release( 30, 0 );// 0 to 255 for length, -128 to 127
@@ -74,10 +74,10 @@ int main( void )
     grid2.setColor(0,127,0);
     grid3.setColor(200,20,200);
     grid4.setColor(255,127,0);
-
+    printf("\n{ ");
     while( usTicks < 2000000 )
     {
-        if( usTicks == 10000 )
+        if( usTicks == 1 )
         {
             bendvelope.noteOn();
         }
@@ -107,10 +107,12 @@ int main( void )
         }
         //Print out test table
         int32_t tempSample;
+
         if(usTicks < 256)
         {
             tempSample = bendvelope.testTable.getSample(usTicks);
             outputGraph.plotPoint((usTicks),tempSample, grid3);
+            //printf("%d, ", bendvelope.attackTable.getSample(usTicks) );
         }
         //Print out test table
         if((usTicks < 512)&&(usTicks >= 256 ))
@@ -133,6 +135,7 @@ int main( void )
         usTicks++;
 
     }
+    printf("255\n},\n");
 
     outputGraph.close();
 

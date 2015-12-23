@@ -19,6 +19,8 @@
 #define NOTE_ON 1
 #define NOTE_NEW 2
 
+extern const uint8_t fastMath[9][257];
+
 AudioEffectBendvelope::AudioEffectBendvelope()
 {
 	//Init variables
@@ -66,7 +68,8 @@ void BendTable::calculate( int32_t upperVar, int32_t lowerVar, int8_t polarity, 
             tempTimeVar = 255 - timeVar;
         }
 
-        ampTemp = (uint16_t)(maxAmp*(float)pow(((float)tempTimeVar/(float)255), (exp((double)2*(float)powerScale/127))));
+        //ampTemp = (uint16_t)(maxAmp*(float)pow(((float)tempTimeVar/(float)255), (exp((double)2*(float)powerScale/127))));
+        ampTemp = (uint16_t)maxAmp*fastMath[(powerScale/32)+4][tempTimeVar] >> 8;
 
         if(ampTemp > 255)
         {
@@ -222,7 +225,7 @@ void AudioEffectBendvelope::tick( uint32_t uTicks )
 		break;
 	case SM_ATTACK:
 		//Increment amp or leave
-		if( amp == 255 )
+		if( amp > 253 )
 		{
 			next_state = SM_ATTACK_HOLD;
 			mainTimeKeeper.uClear();

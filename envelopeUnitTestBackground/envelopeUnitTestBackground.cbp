@@ -19,6 +19,9 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="bend_tables.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="bitmap_image.hpp" />
 		<Unit filename="effect_bendvelope.cpp" />
 		<Unit filename="effect_bendvelope.h" />
