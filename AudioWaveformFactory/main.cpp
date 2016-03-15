@@ -231,6 +231,14 @@ int main( void )
     for(int i = 0; i < 256; i++)
     {
         waveCalcTemp = testWave.getSample();  //center
+        if( waveCalcTemp > 32767 )
+        {
+            printf("sample above top.\n");
+        }
+        if( waveCalcTemp < -32768 )
+        {
+            printf("sample below bottom.\n");
+        }
         //waveCalcTemp = -32700;//test
 
         //Provide int16 data
@@ -248,7 +256,14 @@ int main( void )
     {
         waveCalcTemp = testWave.getSample();  //center
         //waveCalcTemp = -32700;//test
-
+        if( waveCalcTemp > 32767 )
+        {
+            printf("sample above top.\n");
+        }
+        if( waveCalcTemp < -32768 )
+        {
+            printf("sample below bottom.\n");
+        }
         //Provide int16 data
         waveCalcTemp = ((waveCalcTemp >> 8)) + 128;
         //Present the output here
@@ -264,7 +279,14 @@ int main( void )
     {
         waveCalcTemp = testWave.getSample();  //center
         //waveCalcTemp = -32700;//test
-
+        if( waveCalcTemp > 32767 )
+        {
+            printf("sample above top.\n");
+        }
+        if( waveCalcTemp < -32768 )
+        {
+            printf("sample below bottom.\n");
+        }
         //Provide int16 data
         waveCalcTemp = ((waveCalcTemp >> 8)) + 128;
         //Present the output here
@@ -280,6 +302,14 @@ int main( void )
     for(int i = 0; i < 256; i++)
     {
         waveCalcTemp = testWave.getSample();  //center
+        if( waveCalcTemp > 32767 )
+        {
+            printf("sample above top.\n");
+        }
+        if( waveCalcTemp < -32768 )
+        {
+            printf("sample below bottom.\n");
+        }
         //Provide int16 data
         waveCalcTemp = ((waveCalcTemp >> 8)) + 128;
         draw.pen_color(0,0,0);
