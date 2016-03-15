@@ -1,0 +1,31 @@
+# depslib dependency file v1.0
+1458012129 source:d:\github\codeblocks_cpp_projects\audiowaveformfactory\main.cpp
+	"wavegen.h"
+	"stdio.h"
+	"conio.h"
+	<windows.h>
+	"stdint.h"
+	<iostream>
+	<fstream>
+	<cstdlib>
+	<iostream>
+	<string>
+	"bitmap_image.hpp"
+
+1458008166 d:\github\codeblocks_cpp_projects\audiowaveformfactory\wavegen.h
+	"stdint.h"
+
+946710000 d:\github\codeblocks_cpp_projects\audiowaveformfactory\bitmap_image.hpp
+	<algorithm>
+	<cmath>
+	<cstdlib>
+	<fstream>
+	<iostream>
+	<iterator>
+	<limits>
+	<string>
+
+1458011704 source:d:\github\codeblocks_cpp_projects\audiowaveformfactory\wavegen.cpp
+	"math.h"
+	"wavegen.h"
+

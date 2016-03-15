@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1431751754 source:d:\github\codeblocks_cpp_projects\wavegenerator\main.cpp
+1431752383 source:d:\github\codeblocks_cpp_projects\wavegenerator\main.cpp
 	"wavegen.h"
 	"stdio.h"
 	"conio.h"
