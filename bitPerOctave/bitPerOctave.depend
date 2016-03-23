@@ -1,0 +1,16 @@
+# depslib dependency file v1.0
+1458755816 source:d:\github\codeblocks_cpp_projects\bitperoctave\bitperoctaveluts.c
+	<stdint.h>
+
+1458760973 source:d:\github\codeblocks_cpp_projects\bitperoctave\frequencymath.cpp
+	"frequencyMath.h"
+	<stdint.h>
+
+1458760973 d:\github\codeblocks_cpp_projects\bitperoctave\frequencymath.h
+	<stdint.h>
+
+1458761157 source:d:\github\codeblocks_cpp_projects\bitperoctave\main.cpp
+	"frequencyMath.h"
+	"stdio.h"
+	<stdint.h>
+
