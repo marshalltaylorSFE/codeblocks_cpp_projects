@@ -17,7 +17,7 @@
 
 // bitPerOctaveLUTs.c
 extern "C" {
-extern const uint16_t twoPowers13bit[8192];
+extern const uint16_t twoPowers12bit[4096];
 extern const float note2bpo[129];
 }
 
@@ -32,9 +32,19 @@ BPOTestClass::BPOTestClass( void )
 float BPOTestClass::calcBPO( uint16_t input )
 {
     //split top 3 bits
-    uint16_t inputFractional = input & 0x1FFF;
-    uint16_t inputWhole = ( input & 0xE000 ) >> 13;
+    uint16_t inputFractional = input & 0x0FFF;
+    uint16_t inputWhole = ( input & 0x7000 ) >> 12;
     uint16_t baseFreq = ( 5 << inputWhole );
-    return baseFreq * ((float)twoPowers13bit[inputFractional]/8192 + 1);
+    return baseFreq * ((float)twoPowers12bit[inputFractional]/65536 + 1);
     //return (float)twoPowers13bit[inputFractional]/8192;
+}
+
+uint64_t BPOTestClass::calcBPOInc( uint16_t input )
+{
+    //split top 3 bits
+    uint16_t inputFractional = input & 0x0FFF;
+    uint16_t inputWhole = ( input & 0x7000 ) >> 12;
+    uint64_t baseFreq = ( 0x76D6A << inputWhole );
+    return (baseFreq * ((((uint64_t)twoPowers12bit[inputFractional] + 0x10000 ) << 8))) >> 24;
+    //return (baseFreq * 0x1000000 ) >> 24;
 }

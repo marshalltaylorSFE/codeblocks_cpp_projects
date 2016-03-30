@@ -20,6 +20,7 @@ class BPOTestClass
 public:
     BPOTestClass( void );
     float calcBPO( uint16_t );
+    uint64_t calcBPOInc( uint16_t );
 
 };
 
